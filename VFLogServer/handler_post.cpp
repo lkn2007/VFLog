@@ -42,13 +42,13 @@ bool url_decode(const std::string& in, std::string& out)
 std::map<std::string, std::string>parse_crow_post_data(const std::string& req_body)
 {
 	std::map<std::string, std::string> body;
-
 	std::vector<std::string> vec;
 	std::string tmp;
 	bool result = url_decode(req_body, tmp);
 	if (result)
 	{
-		boost::algorithm::split(vec, tmp, [](char x) {return x == '&'; }); //!!!!!!!!!!!!!!!
+		boost::algorithm::split(vec, tmp, [](char x) {return x == '&'; });
+		
 		for (auto& it : vec)
 		{
 			auto pos = it.find("=");
@@ -71,10 +71,23 @@ bool handler_post(const std::string& body)
 	std::string vflogclient_id = post_body["vflogclient_id"];
 	std::string client_handler = post_body["client_handler_id"];
 	std::string log_string = post_body["data"];
+	
 	if (client_handler == "squid")
 	{
 		HandlerSquid a;		
-
-		return a.write_data_in_database(vflogclient_id, log_string);
+		return a.write(vflogclient_id, client_handler,log_string);
 	} 
+	
+	if (client_handler == "syslog")
+	{
+		
+	}
+	
+	if (client_handler == "apache")
+	{
+		
+	}
+
+
+  return false;
 }

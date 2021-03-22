@@ -1,15 +1,6 @@
 #include "HandlerSquid.h"
 
-#include <iostream>
-
-bool HandlerSquid::check(const std::string& vflogclient_id, const std::string& client_handler,
-						 const std::string& log_string)const
-{			
-
-	return true;
-}
-
-bool HandlerSquid::write_data_in_database(const std::string& vflogclient_id, const std::string& str)
+bool HandlerSquid::write(const std::string& vflogclient_id, const std::string& client_handler, const std::string& log_string)const
 {
 	MYSQL* conn;
 	//MYSQL_RES* res;
@@ -19,14 +10,14 @@ bool HandlerSquid::write_data_in_database(const std::string& vflogclient_id, con
 	int qstate;
 
 	if (conn)
-	{
-		std::stringstream ss(str);
-		std::string data;
-		std::string tmp;
-		std::string tmp2;
+	{		
+		std::stringstream ss(log_string);
+		std::string data;		
+		std::string tmp2;		
 		while (std::getline(ss, data, '\n'))
 		{
 			std::stringstream ss2(data);
+			std::string tmp;
 			tmp = "('" + vflogclient_id + "',";
 			int counter = 0;
 			while (std::getline(ss2, data, ' '))
@@ -34,21 +25,17 @@ bool HandlerSquid::write_data_in_database(const std::string& vflogclient_id, con
 				if (data.size() == 0)
 				{
 					continue;
-				}
-				if (counter < 9 )
-				{
-					tmp += "'" + data + "'" + ",";
-				}
+				}								
+				tmp += "'" + data + "'" + ",";	
 				counter++;
-			}
+			}			
 			tmp.erase(tmp.size() - 1);
-			tmp += ")";
-			
+			tmp += ")";			
 			tmp2 += tmp + ",";			
 		}
 		tmp2.erase(tmp2.size() - 1);
 
-		std::string query = "INSERT INTO squids(`clients_id`,`linux_time`, `time_response`, `request_source`, `request_status/http_status_code`, `size_request`, `metod_request`, `url_reques`, `user_name`, `hierarchy_status/requesting_server`)  VALUES"	+ tmp2;		
+		std::string query = "INSERT INTO squids(`clients_id`,`linux_time`, `time_response`, `request_source`, `request_status/http_status_code`, `size_request`, `metod_request`, `url_reques`, `user_name`, `hierarchy_status/requesting_server`, `mime_type`)  VALUES"	+ tmp2;		
 		
 		const char* q = query.c_str();
 		qstate = mysql_query(conn, q);

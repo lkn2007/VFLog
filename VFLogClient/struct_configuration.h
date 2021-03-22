@@ -1,7 +1,6 @@
 #pragma once
 #ifndef _STRUCT_CONFIGURATION_
 #define _STRUCT_CONFIGURATION_
-
 #include <string>
 struct configuration
 {

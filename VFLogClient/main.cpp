@@ -7,20 +7,6 @@
 
 int main(int argc, char* argv[])
 {
-	/*
-		struct tm newtime;
-		char buf[80];
-
-		std::time_t t = std::time(0);
-		localtime_s(&newtime, &t);
-		strftime(buf, sizeof(buf), "%d-%m-%Y  %X", &newtime) << '\n';
-		//strftime(buf, sizeof(buf), "%d-%m-%Y  %X", std::localtime(&t)) << '\n';
-
-		//std::cout << buf << '\n';
-		parsing_conf_file();
-
-	*/
-
 	configuration conf;
 	conf = parsing_conf_file(conf);
 
@@ -42,13 +28,11 @@ int main(int argc, char* argv[])
 					ofs.close();
 				}
 			}
-
 			std::vector<std::string> data_log = read_data_in_file(conf.log_file, conf);
 			if (data_log.size() == 0)
 			{
 				break;
 			}
-
 			if (!connect_to_server(data_log, conf))
 			{
 				std::cerr << "Failed to Connect" << '\n';
@@ -64,10 +48,9 @@ int main(int argc, char* argv[])
 				{
 					ofs << data_log[i] + '\n';
 				}
-
 			}
 		}
-		Sleep(atoi(conf.read_log_file_interval.c_str()));
+	  Sleep(atoi(conf.read_log_file_interval.c_str()));
 	}
-	return 0;
+  return 0;
 }

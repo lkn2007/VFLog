@@ -28,78 +28,56 @@ configuration parsing_conf_file(configuration conf)
 				std::getline(ss, tmp);
 				if (tmp.size() == 0)
 				{
-					std::cerr << "ERROR: value parametr vflogserver is null\n";
-					//break;
+					std::cerr << "ERROR: value parametr vflogserver is null\n";					
 					exit(0);
 				}
-				conf.vflogserver = tmp;
-				//std::cout << "value parametr vflogserver = " << conf.vflogserver << '\n';
+				conf.vflogserver = tmp;				
 			}
-
 			if (tmp == "vflogserver_port")
 			{
 				std::getline(ss, tmp);
-				conf.vflogserver_port = tmp;
-				//std::cout << "value parametr = " << conf.vflogserver_port << '\n';				
+				conf.vflogserver_port = tmp;				
 			}
-
 			if (tmp == "vflogserver_url")
 			{
 				std::getline(ss, tmp);
-				conf.vflogserver_url = tmp;
-				//std::cout << "value parametr = " << conf.vflogserver_url << '\n';
+				conf.vflogserver_url = tmp;				
 			}
-
 			if (tmp == "log_file")
 			{
 				std::getline(ss, tmp);
-				conf.log_file = tmp;
-				//std::cout << "value parametr = " << conf.log_file << '\n';
+				conf.log_file = tmp;				
 			}
-
 			if (tmp == "vflogclient_id")
 			{
 				std::getline(ss, tmp);
-				conf.vflogclient_id = tmp;
-				//std::cout << "value parametr = " << conf.vflogclient_id << '\n';
+				conf.vflogclient_id = tmp;				
 			}
-
 			if (tmp == "vflogclient_handler_id")
 			{
 				std::getline(ss, tmp);
-				conf.vflogclient_handler_id = tmp;
-				//std::cout << "value parametr = " << conf.vflogclient_handler_id << '\n';
+				conf.vflogclient_handler_id = tmp;				
 			}
-
 			if (tmp == "read_log_file_interval")
 			{
 				std::getline(ss, tmp);
-				conf.read_log_file_interval = tmp;
-				//std::cout << "value parametr = " << conf.read_log_file_interval << '\n';
+				conf.read_log_file_interval = tmp;				
 			}
-
 			if (tmp == "max_transmitted_ll")
 			{
 				std::getline(ss, tmp);
-				conf.max_transmitted_ll = tmp;
-				//std::cout << "value parametr = " << conf.max_transmitted_ll << '\n';
+				conf.max_transmitted_ll = tmp;				
 			}
-
 		}
-
 		if (conf.vflogserver == "")
 		{
 			std::cerr << "ERROR: missing vflogserver parameter\n";
 			exit(0);
 		}
-
-
 	}
 	else
 	{
-		std::cout << "file " << path << " not found\n";
-		//exit(0);
+		std::cout << "file " << path << " not found\n";	
 	}
-
-	return conf;
+  return conf;
 }

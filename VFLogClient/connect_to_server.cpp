@@ -24,19 +24,8 @@ bool connect_to_server(std::vector<std::string> data_log, const configuration& c
 
 		request.setOpt(new curlpp::options::HttpHeader(header));
 		request.setOpt(new curlpp::options::PostFields(post_data));
-		request.setOpt(new curlpp::options::PostFieldSize(post_data.size()));
-		
-		
-		//std::ostringstream response;
-		//request.setOpt(new curlpp::options::WriteStream(&response));
-						
+		request.setOpt(new curlpp::options::PostFieldSize(post_data.size()));							
 		request.perform();
-			
-		 //std::cout <<"!!!" << std::string(response.str())<<"!!!!!!!!!!!!";
-
-		//std::cout << "!!!!!!!!!!!!!!!!" << request <<"!!!!!!!";
-
-
 	}
 	catch (curlpp::LogicError& e)
 	{
@@ -48,5 +37,5 @@ bool connect_to_server(std::vector<std::string> data_log, const configuration& c
 		std::cout << e.what() << std::endl;
 		return false;
 	}
-	return true;
+  return true;
 }

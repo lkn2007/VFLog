@@ -1,8 +1,7 @@
-#include "web_interface_mode.h"
+#include "web_server.h"
 
 int main(int argc, char* argv[])
-{
-	web_interface_mode();	
-
+{	
+	web_server();	
 	return 0;
 }

@@ -40,17 +40,15 @@ std::vector<std::string> read_data_in_file(std::string path, const configuration
 		}
 	}
 	ifs.clear();
-	//std::cout << "transmitted_log_lines = " << file_data.size() << '\n';
-	//std::cout << "pozitions after transmitted = " << ifs.tellg() << " bytes" << "\n\n";
+	
 	ofs.open("counter");
 	if (!ofs)
 	{
 		std::cerr << "File Counter could not be opened" << '\n';
 		exit(1);
-	}
+	}	
 	ofs << ifs.tellg();
 	ofs.close();
 	ifs.close();
-
-	return file_data;
+  return file_data;
 }

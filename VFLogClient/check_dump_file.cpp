@@ -19,5 +19,5 @@ std::vector<std::string> check_dump_file()
 		}
 	}
 	ifs.close();
-	return dump_data;
+  return dump_data;
 }
